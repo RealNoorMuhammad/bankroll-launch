@@ -182,7 +182,7 @@ export default function PfpPage() {
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(204,255,0,0.07)_0%,transparent_45%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(1,50,31,0.07)_0%,transparent_45%)]"
         />
 
         <div className="relative z-10 mx-auto w-full max-w-6xl">
@@ -200,7 +200,7 @@ export default function PfpPage() {
 
             <h1 className="mt-5 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Make your{' '}
-              <span className="text-bankroll-green [text-shadow:0_0_28px_rgba(204,255,0,0.4)]">
+              <span className="text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
                 outlaw PFP
               </span>
             </h1>
@@ -331,7 +331,7 @@ export default function PfpPage() {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center gap-2 px-6 text-center">
-                    <span className="size-3 rotate-45 bg-[#ff2d4a] shadow-[0_0_12px_rgba(255,45,74,0.7)]" />
+                    <span className="size-3 rotate-45 bg-[#ff2d4a] " />
                     <p className="font-display text-lg text-white/45 italic">
                       Your cinematic hotline shot appears here
                     </p>
@@ -347,7 +347,7 @@ export default function PfpPage() {
                   rel="noreferrer"
                   className={`inline-flex flex-1 items-center justify-center gap-2 rounded-xl border px-4 py-3 font-sans text-xs font-semibold tracking-wide uppercase transition ${
                     resultUrl
-                      ? 'border-bankroll-green/50 bg-bankroll-green text-black hover:brightness-110'
+                      ? 'bankroll-green-shine border border-bankroll-green/50'
                       : 'pointer-events-none border-white/10 text-white/30'
                   }`}
                 >

@@ -32,7 +32,7 @@ function Track({ reverse = false }) {
           <span
             className={`whitespace-nowrap font-display text-[1.55rem] leading-none font-bold tracking-tight uppercase sm:text-[1.85rem] md:text-[2.05rem] ${
               item.accent
-                ? 'text-bankroll-green [text-shadow:0_0_20px_rgba(204,255,0,0.45)]'
+                ? 'text-bankroll-green'
                 : 'text-white'
             }`}
           >

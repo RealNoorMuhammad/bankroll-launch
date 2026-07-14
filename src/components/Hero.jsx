@@ -9,6 +9,7 @@ import dialupPhone from '../assets/dailup.png'
 import vintageRing from '../assets/Vintage.mp3'
 import { usePhoneLiveStats } from '../hooks/usePhoneLiveStats'
 import LivePhoneStats from './LivePhoneStats'
+import { scrollToHash } from '../lib/scrollToHash'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -200,7 +201,7 @@ export default function Hero() {
               {...fadeUp(0.22)}
             >
               <span className="block text-white">1-800</span>
-              <span className="mt-1 block text-bankroll-green [text-shadow:0_0_24px_rgba(204,255,0,0.3)]">
+              <span className="mt-1 block text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
                 $BANKROLL
               </span>
             </motion.h1>
@@ -228,6 +229,11 @@ export default function Hero() {
 
               <a
                 href={BUY_HREF}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToHash('buy')
+                  window.history.pushState(null, '', '#buy')
+                }}
                 className="inline-flex items-center justify-center rounded-lg border border-bankroll-gold/90 bg-black/55 px-5 py-3 font-sans text-sm font-semibold tracking-wide text-white uppercase transition hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bankroll-gold sm:px-6 sm:py-3.5 sm:text-[0.95rem]"
               >
                 Buy $BANKROLL

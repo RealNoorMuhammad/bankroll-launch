@@ -14,10 +14,10 @@ export default function LivePhoneStats({ ringCount, floaters }) {
         className="flex items-center gap-2 rounded-full border border-bankroll-gold/35 bg-black/75 px-3 py-1.5 backdrop-blur-md sm:px-3.5 sm:py-2"
       >
         <span className="relative flex size-2.5">
-          <span className="absolute inset-0 animate-ping rounded-full bg-bankroll-green opacity-70" />
-          <span className="relative size-2.5 rounded-full bg-bankroll-green shadow-[0_0_12px_rgba(204,255,0,0.8)]" />
+          <span className="absolute inset-0 animate-ping rounded-full bg-bankroll-ruby opacity-70" />
+          <span className="relative size-2.5 rounded-full bg-bankroll-ruby" />
         </span>
-        <span className="font-sans text-[0.65rem] font-semibold tracking-[0.18em] text-bankroll-green uppercase sm:text-[0.7rem]">
+        <span className="font-sans text-[0.65rem] font-semibold tracking-[0.18em] text-white uppercase sm:text-[0.7rem]">
           Live
         </span>
       </motion.div>
@@ -49,7 +49,7 @@ export default function LivePhoneStats({ ringCount, floaters }) {
                 animate={{ opacity: 1, y: -28, scale: 1.05 }}
                 exit={{ opacity: 0, y: -56 }}
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute right-0 font-display text-xl font-bold text-bankroll-green [text-shadow:0_0_18px_rgba(204,255,0,0.55)] sm:text-2xl"
+                className="absolute right-0 font-display text-xl font-bold text-bankroll-green sm:text-2xl"
               >
                 +1
               </motion.span>

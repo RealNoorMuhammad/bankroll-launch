@@ -171,7 +171,7 @@ export default function HowToBuy() {
                 i % 3 === 0
                   ? 'radial-gradient(ellipse at center, rgba(176,16,48,0.45) 0%, rgba(176,16,48,0.08) 45%, transparent 70%)'
                   : i % 3 === 1
-                    ? 'radial-gradient(ellipse at center, rgba(204,255,0,0.18) 0%, rgba(204,255,0,0.04) 40%, transparent 70%)'
+                    ? 'radial-gradient(ellipse at center, rgba(1,50,31,0.18) 0%, rgba(1,50,31,0.04) 40%, transparent 70%)'
                     : 'radial-gradient(ellipse at center, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.03) 42%, transparent 70%)',
               filter: 'blur(28px)',
             }}
@@ -191,7 +191,7 @@ export default function HowToBuy() {
           </p>
           <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
             How to buy{' '}
-            <span className="text-bankroll-green [text-shadow:0_0_28px_rgba(204,255,0,0.4)]">
+            <span className="text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
               $BANKROLL
             </span>
           </h2>
@@ -248,7 +248,7 @@ export default function HowToBuy() {
           <p className="mt-2 font-display text-xl font-bold text-white sm:text-2xl">
             Coming Soon
           </p>
-          <p className="mt-1 font-sans text-xs tracking-[0.2em] text-bankroll-green uppercase sm:text-sm">
+          <p className="mt-1 font-sans text-xs tracking-[0.2em] text-bankroll-ruby uppercase sm:text-sm">
             on Robinhood Chain
           </p>
         </div>

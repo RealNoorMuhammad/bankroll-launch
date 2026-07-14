@@ -40,13 +40,13 @@ export default function BeforeFooter() {
           />
 
           <div className="relative z-10 flex flex-col items-center">
-            <p className="font-sans text-[0.7rem] font-medium uppercase tracking-[0.22em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.95),0_0_18px_rgba(0,0,0,0.85),0_0_40px_rgba(0,0,0,0.65)] sm:text-xs md:text-sm md:tracking-[0.28em] md:[text-shadow:0_1px_2px_rgba(0,0,0,0.8),0_0_16px_rgba(0,0,0,0.55)]">
+            <p className="font-sans text-[0.7rem] font-medium uppercase tracking-[0.22em] text-white sm:text-xs md:text-sm md:tracking-[0.28em] md:[text-shadow:0_1px_2px_rgba(0,0,0,0.8),0_0_16px_rgba(0,0,0,0.55)]">
               The only hotline that can&apos;t help you...
             </p>
 
-            <h2 className="mt-3 font-display text-[2.15rem] leading-[1.05] font-bold tracking-tight text-white uppercase [text-shadow:0_2px_4px_rgba(0,0,0,0.95),0_0_28px_rgba(0,0,0,0.9),0_0_56px_rgba(0,0,0,0.7)] sm:mt-4 sm:text-5xl md:text-6xl md:[text-shadow:0_2px_4px_rgba(0,0,0,0.85),0_0_24px_rgba(0,0,0,0.55)] lg:text-7xl">
+            <h2 className="mt-3 font-display text-[2.15rem] leading-[1.05] font-bold tracking-tight text-white uppercase sm:mt-4 sm:text-5xl md:text-6xl md:[text-shadow:0_2px_4px_rgba(0,0,0,0.85),0_0_24px_rgba(0,0,0,0.55)] lg:text-7xl">
               But the{' '}
-              <span className="text-bankroll-green [text-shadow:0_2px_4px_rgba(0,0,0,0.95),0_0_20px_rgba(204,255,0,0.55),0_0_48px_rgba(0,0,0,0.8)]">
+              <span className="text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
                 Chart
               </span>{' '}
               Can.

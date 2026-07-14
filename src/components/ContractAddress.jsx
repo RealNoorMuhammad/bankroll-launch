@@ -13,7 +13,7 @@ export default function ContractAddress() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(204,255,0,0.06)_0%,transparent_45%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(1,50,31,0.06)_0%,transparent_45%)]"
       />
 
       <motion.div
@@ -28,7 +28,7 @@ export default function ContractAddress() {
         </p>
         <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
           Contract{' '}
-          <span className="text-bankroll-green [text-shadow:0_0_24px_rgba(204,255,0,0.35)]">
+          <span className="text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
             Address
           </span>
         </h2>
@@ -40,7 +40,7 @@ export default function ContractAddress() {
           <p className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
             Coming Soon
           </p>
-          <p className="mt-3 font-sans text-sm tracking-[0.22em] text-bankroll-green uppercase sm:text-base">
+          <p className="mt-3 font-sans text-sm tracking-[0.22em] text-bankroll-ruby uppercase sm:text-base">
             on Robinhood Chain
           </p>
         </div>

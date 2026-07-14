@@ -1,15 +1,16 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { Menu, X } from 'lucide-react'
 import logo from '../assets/logo.png'
+import { scrollToHash } from '../lib/scrollToHash'
 
-const BUY_HREF = '/#buy'
+const BUY_TO = { pathname: '/', hash: 'buy' }
 
 const navLinks = [
   { label: 'Home', to: '/', type: 'route' },
-  { label: 'How to buy', to: '/#howtobuy', type: 'hash' },
-  { label: 'Chart', to: '/#chart', type: 'hash' },
+  { label: 'How to buy', to: { pathname: '/', hash: 'howtobuy' }, type: 'hash' },
+  { label: 'Chart', to: { pathname: '/', hash: 'chart' }, type: 'hash' },
   { label: 'PFP', to: '/pfp', type: 'route' },
   { label: 'Dashboard', to: '/dashboard', type: 'route' },
 ]
@@ -18,6 +19,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
   const headerRef = useRef(null)
   const pillRef = useRef(null)
   const brandRef = useRef(null)
@@ -32,24 +34,41 @@ export default function Navbar() {
 
   useEffect(() => {
     setOpen(false)
-  }, [location.pathname])
+  }, [location.pathname, location.hash])
 
   const closeMenu = () => setOpen(false)
 
   const linkClass =
-    'font-sans text-sm font-medium tracking-[0.14em] text-white/80 uppercase outline-none transition hover:text-bankroll-green focus-visible:text-bankroll-green'
+    'group relative inline-block font-sans text-sm font-medium tracking-[0.14em] text-white/80 uppercase outline-none transition-colors hover:text-white focus-visible:text-white after:pointer-events-none after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-white after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100 focus-visible:after:scale-x-100'
 
   const mobileLinkClass =
-    'border-b border-white/10 py-4 font-display text-4xl font-bold tracking-tight text-white transition hover:text-bankroll-green'
+    'border-b border-white/10 py-4 font-display text-4xl font-bold tracking-tight text-white transition hover:text-white'
+
+  const goHash = (hashId) => {
+    closeMenu()
+    if (location.pathname === '/') {
+      if (location.hash !== `#${hashId}`) {
+        navigate({ pathname: '/', hash: hashId }, { replace: false })
+      }
+      // Same-page: ensure scroll even if hash is unchanged
+      requestAnimationFrame(() => scrollToHash(hashId))
+      return
+    }
+    navigate({ pathname: '/', hash: hashId })
+  }
 
   const renderLink = (link, className, extra = {}) => {
-    if (link.type === 'route') {
+    if (link.type === 'hash') {
+      const hashId = typeof link.to === 'object' ? link.to.hash : String(link.to).split('#')[1]
       return (
         <Link
           key={link.label}
           to={link.to}
           className={className}
-          onClick={closeMenu}
+          onClick={(e) => {
+            e.preventDefault()
+            goHash(hashId)
+          }}
           {...extra}
         >
           {link.label}
@@ -58,15 +77,15 @@ export default function Navbar() {
     }
 
     return (
-      <a
+      <Link
         key={link.label}
-        href={link.to}
+        to={link.to}
         className={className}
         onClick={closeMenu}
         {...extra}
       >
         {link.label}
-      </a>
+      </Link>
     )
   }
 
@@ -130,7 +149,7 @@ export default function Navbar() {
           backgroundColor: 'rgba(0,0,0,0.9)',
           borderColor: 'rgba(199,164,92,0.4)',
           boxShadow:
-            '0 20px 55px rgba(0,0,0,0.6), 0 0 0 1px rgba(204,255,0,0.08), inset 0 1px 0 rgba(255,255,255,0.07)',
+            '0 20px 55px rgba(0,0,0,0.6), 0 0 0 1px rgba(1,50,31,0.08), inset 0 1px 0 rgba(255,255,255,0.07)',
           backdropFilter: 'blur(20px)',
           duration: 0.7,
           ease: 'power3.out',
@@ -245,12 +264,16 @@ export default function Navbar() {
             </div>
 
             <div ref={ctaRef} className="hidden items-center gap-3 md:flex">
-              <a
-                href={BUY_HREF}
-                className="inline-flex items-center rounded-full bg-bankroll-green px-4 py-2 font-sans text-xs font-bold tracking-wide text-black uppercase transition hover:brightness-110"
+              <Link
+                to={BUY_TO}
+                onClick={(e) => {
+                  e.preventDefault()
+                  goHash('buy')
+                }}
+                className="bankroll-green-shine inline-flex items-center rounded-full px-4 py-2 font-sans text-xs font-bold tracking-wide uppercase transition"
               >
                 Buy $BANKROLL
-              </a>
+              </Link>
             </div>
 
             <button
@@ -289,16 +312,19 @@ export default function Navbar() {
             }),
           )}
 
-          <a
-            href={BUY_HREF}
+          <Link
+            to={BUY_TO}
             ref={(el) => {
               menuItemsRef.current[navLinks.length] = el
             }}
-            onClick={closeMenu}
-            className="mt-8 inline-flex items-center justify-center rounded-xl bg-bankroll-green px-6 py-4 font-sans text-sm font-bold tracking-[0.16em] text-black uppercase"
+            onClick={(e) => {
+              e.preventDefault()
+              goHash('buy')
+            }}
+            className="bankroll-green-shine mt-8 inline-flex items-center justify-center rounded-xl px-6 py-4 font-sans text-sm font-bold tracking-[0.16em] uppercase"
           >
             Buy $BANKROLL
-          </a>
+          </Link>
         </div>
 
         <p className="px-6 pb-8 text-center font-sans text-xs tracking-[0.2em] text-white/40 uppercase">

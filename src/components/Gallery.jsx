@@ -99,7 +99,7 @@ export default function Gallery() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(204,255,0,0.07)_0%,transparent_45%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(1,50,31,0.07)_0%,transparent_45%)]"
       />
       <div
         aria-hidden
@@ -130,7 +130,7 @@ export default function Gallery() {
           <div ref={titleRef}>
             <h2 className="mt-5 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Gallery{' '}
-              <span className="text-bankroll-green [text-shadow:0_0_28px_rgba(204,255,0,0.4)]">
+              <span className="text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
                 under development
               </span>
             </h2>
