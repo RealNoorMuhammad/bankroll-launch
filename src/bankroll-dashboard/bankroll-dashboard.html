@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1-800-BANKROLL · Holder Rewards</title>
+<style>
+  :root{
+    --bg:#0A0705; --line:#3A2418; --line2:#241610;
+    --gold:#C7A45C; --goldhi:#F1D9A0; --ruby:#C33A4B;
+    --ink:#F4EDE3; --mut:#8A6A3B; --body:#C9B79E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;min-height:100vh}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px 64px}
+  .mono{font-family:'Courier New',monospace}
+  .sans{font-family:system-ui,-apple-system,sans-serif}
+  .label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  /* top bar */
+  .top{border-bottom:1px solid var(--line2);background:rgba(10,7,5,.9)}
+  .topin{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+  .logo{display:flex;gap:12px;align-items:center}
+  .dial{width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);background:radial-gradient(circle at 30% 30%,#8E1020,#4A0810);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .brand{font-size:18px;font-weight:bold}
+  .brand span{color:var(--ruby)}
+  .badge{border:1px solid var(--line);color:#B08D4F;border-radius:999px;padding:4px 11px;font-size:10px;letter-spacing:.15em}
+  .buy{background:linear-gradient(180deg,#B31B2C,#7C0F1D);color:#FBEFE0;border:none;border-radius:10px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer}
+  /* hero */
+  .hero{text-align:center;padding-top:48px}
+  h1{font-size:clamp(30px,5.5vw,44px);line-height:1.15;max-width:620px;margin:0 auto}
+  h1 em{color:#E0B15E;font-style:normal}
+  .lede{margin:16px auto 0;font-size:14px;line-height:1.6;color:var(--body);max-width:520px}
+  .specs{margin-top:20px;font-size:11px;letter-spacing:.15em;color:var(--mut)}
+  /* money card */
+  .money{margin-top:40px;border:1px solid var(--gold);border-radius:18px;background:linear-gradient(160deg,#1A110C 0%,#120B08 60%,#0D0806 100%);box-shadow:0 0 70px rgba(179,27,44,.10);display:grid;grid-template-columns:1fr}
+  .paid{padding:32px 24px;text-align:center;border-bottom:1px solid var(--line2)}
+  .paid .big{margin-top:16px;font-size:clamp(44px,9vw,68px);color:var(--goldhi);text-shadow:0 0 40px rgba(224,177,94,.25)}
+  .paid .sub{margin-top:16px;font-size:11px;color:var(--mut)}
+  .next{padding:32px 24px}
+  .next .head{display:flex;justify-content:space-between;align-items:center}
+  .count{text-align:center;font-size:34px;letter-spacing:.12em;color:var(--goldhi);margin-top:16px}
+  .bar{height:4px;border-radius:999px;background:var(--line2);overflow:hidden;margin-top:16px}
+  .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#7C0F1D,#C33A4B,#E0B15E)}
+  .kv{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px}
+  .kv .k{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mut)}
+  .kv .v{color:#E9DCC3;font-size:14px}
+  @media(min-width:820px){
+    .money{grid-template-columns:3fr 2fr}
+    .paid{border-bottom:none;border-right:1px solid var(--line2)}
+  }
+  /* duo */
+  .duo{display:grid;gap:22px;margin-top:22px;grid-template-columns:1fr}
+  @media(min-width:900px){.duo{grid-template-columns:1fr 1fr}}
+  .panel{border:1px solid var(--line);border-radius:18px;padding:26px;background:#110B08}
+  .row{margin-top:24px}
+  .row:first-of-type{margin-top:22px}
+  .rowhead{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;margin-bottom:8px}
+  .rowhead .name{color:var(--body)}
+  .rowhead .val{color:var(--goldhi)}
+  input[type=range]{width:100%;accent-color:#B31B2C}
+  .hint{margin-top:8px;font-size:11px;color:var(--mut)}
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .preset{border:1px solid var(--line);background:transparent;color:#9C8869;border-radius:999px;padding:5px 12px;font-size:11px;cursor:pointer;font-family:'Courier New',monospace}
+  .preset.on{border-color:var(--gold);color:var(--goldhi);background:#221508}
+  /* receipt */
+  .receipt{background:linear-gradient(180deg,#F7EFDC 0%,#EFE3C8 100%);border:1px solid var(--gold);border-radius:18px;color:#2A1B10;font-family:'Courier New',monospace;padding:26px}
+  .rhead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed #B49A6A;padding-bottom:12px}
+  .rline{display:flex;justify-content:space-between;font-size:13px;padding:2px 0}
+  .rblock{border-bottom:1px dashed #B49A6A;padding:14px 0}
+  .rmoney{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0}
+  .rmoney .k{font-size:11px}
+  .rmoney .v{font-size:15px;font-weight:bold}
+  .rapr{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px}
+  .rapr .v{font-size:24px;font-weight:bold}
+  .rnote{padding-top:10px;font-size:9px;line-height:1.5}
+  /* footer */
+  .foot{margin-top:48px;border-top:1px solid var(--line2);padding-top:22px}
+  .foot .line{font-size:11px;letter-spacing:.08em;color:var(--gold);font-family:'Courier New',monospace}
+  .foot p{margin-top:12px;font-size:12px;line-height:1.6;color:var(--mut)}
+</style>
+</head>
+<body>
+  <div class="top"><div class="topin">
+    <div class="logo">
+      <div class="dial">☎</div>
+      <div class="brand">1-800<span>-BANKROLL</span></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span class="badge mono">DEMO</span>
+      <button class="buy" onclick="alert('Contract not deployed yet — demo build.')">Buy $BANKROLL</button>
+    </div>
+  </div></div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>Hold $BANKROLL. Get paid daily. <em>Automatically.</em></h1>
+      <p class="lede sans">Every trade pays a 4% buy and sell tax — 100% of it goes straight back to holders every 24 hours, paid in $BANKROLL.</p>
+      <div class="specs mono">4% TAX PER TRADE&nbsp;&nbsp;·&nbsp;&nbsp;PAID EVERY 24H IN $BANKROLL&nbsp;&nbsp;·&nbsp;&nbsp;0% KEPT BY TEAM</div>
+    </div>
+
+    <div class="money">
+      <div class="paid">
+        <div class="label">Total paid out to holders</div>
+        <div class="big mono" id="totalPaid">$0</div>
+        <div class="sub mono">USD value · sample — 14 days at your volume setting</div>
+      </div>
+      <div class="next">
+        <div class="head"><div class="label">Next payout</div><span>⏱</span></div>
+        <div class="count mono" id="count">--:--:--</div>
+        <div class="bar"><i id="cbar" style="width:0%"></i></div>
+        <div class="kv"><span class="k">Pool per day</span><span class="v mono" id="poolDay">$0</span></div>
+        <div class="kv"><span class="k">You per day</span><span class="v mono" id="youDay">$0</span></div>
+      </div>
+    </div>
+
+    <div class="duo">
+      <div class="panel">
+        <div class="label">Payout calculator</div>
+        <div class="sans">
+          <div class="row">
+            <div class="rowhead"><span class="name">Your $BANKROLL balance</span><span class="val mono" id="holdLbl">0</span></div>
+            <input type="range" id="hold" min="0" max="5000000" step="5000" value="500000" />
+            <div class="hint" id="holdHint"></div>
+          </div>
+          <div class="row">
+            <div class="rowhead"><span class="name">24h volume (USD)</span><span class="val mono" id="volLbl">$0</span></div>
+            <input type="range" id="vol" min="10000" max="10000000" step="10000" value="500000" />
+            <div class="presets" id="volPresets"></div>
+          </div>
+          <div class="row">
+            <div class="rowhead"><span class="name">Market cap (USD)</span><span class="val mono" id="mcLbl">$0</span></div>
+            <input type="range" id="mc" min="100000" max="20000000" step="100000" value="2000000" />
+            <div class="presets" id="mcPresets"></div>
+            <div class="hint" id="mcHint"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="receipt">
+        <div class="rhead">
+          <div><div style="font-size:10px;letter-spacing:.15em">CALL RECORD</div>
+          <div style="font-size:17px;font-weight:bold;letter-spacing:.05em">1-800-BANKROLL</div></div>
+          <div style="font-size:18px">☎</div>
+        </div>
+        <div class="rblock">
+          <div class="rline"><span>BALANCE</span><span id="rBal">0 BNKRL</span></div>
+          <div class="rline"><span>SHARE OF SUPPLY</span><span id="rShare">0%</span></div>
+          <div class="rline"><span>PAYOUT ASSET</span><span>$BANKROLL</span></div>
+          <div class="rline"><span>&asymp; TOKENS / DAY</span><span id="rTok">—</span></div>
+          <div class="rline"><span>LINE STATUS</span><b id="rStatus">NO BALANCE</b></div>
+        </div>
+        <div class="rblock">
+          <div class="rmoney"><span class="k">DAILY</span><span class="v" id="rD">—</span></div>
+          <div class="rmoney"><span class="k">WEEKLY</span><span class="v" id="rW">—</span></div>
+          <div class="rmoney"><span class="k">MONTHLY</span><span class="v" id="rM">—</span></div>
+          <div class="rmoney"><span class="k">YEARLY</span><span class="v" id="rY">—</span></div>
+        </div>
+        <div class="rapr"><span style="font-size:11px">EST. ANNUAL RATE*</span><span class="v" id="rApr">—</span></div>
+        <div class="rnote">*USD value at the settings you chose. Rewards are paid in $BANKROLL, so their dollar value moves with the token price. Real payouts vary with actual volume and holders, can be zero, and are never guaranteed. Not financial advice.</div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="line">100% OF THE TAX → HOLDERS · PAID IN $BANKROLL · NO TEAM ALLOCATION · DISTRIBUTOR WALLET PUBLIC</div>
+      <p class="sans">Demo build — every figure is calculated from the assumptions you set above; nothing is live market data yet. $BANKROLL is a memecoin, not an investment product, and is not affiliated with Robinhood. Nothing on this page is financial advice.</p>
+    </div>
+  </div>
+
+<script>
+const SUPPLY=100000000, TAX=0.04, CYCLE=24;
+const $=id=>document.getElementById(id);
+const usd=(n,d=2)=>"$"+Number(n).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d});
+const num=n=>Number(n).toLocaleString("en-US");
+const compact=n=>Intl.NumberFormat("en-US",{notation:"compact",maximumFractionDigits:1}).format(n);
+
+let hold=500000, vol=500000, mc=2000000;
+
+function presets(el,vals,get,set){
+  el.innerHTML="";
+  vals.forEach(v=>{
+    const b=document.createElement("button");
+    b.className="preset"+(get()===v?" on":"");
+    b.textContent=compact(v);
+    b.onclick=()=>{set(v);render();};
+    el.appendChild(b);
+  });
+}
+
+function render(){
+  const price=mc/SUPPLY;
+  const pool=vol*TAX;
+  const share=Math.min(hold/SUPPLY,1);
+  const daily=pool*share;
+  const value=hold*price;
+  const apr=value>0?daily*365/value*100:0;
+  const ok=hold>0;
+
+  $("holdLbl").textContent=num(hold); $("hold").value=hold;
+  $("holdHint").textContent="= "+(100*hold/SUPPLY).toFixed(3)+"% of the 100M supply";
+  $("volLbl").textContent=usd(vol,0); $("vol").value=vol;
+  $("mcLbl").textContent=usd(mc,0); $("mc").value=mc;
+  $("mcHint").textContent="Token price "+usd(price,4)+" → your balance is worth "+usd(value);
+  $("totalPaid").textContent=usd(pool*14,0);
+  $("poolDay").textContent=usd(pool,0);
+  $("youDay").textContent=usd(daily);
+  $("rBal").textContent=num(hold)+" BNKRL";
+  $("rShare").textContent=(share*100).toFixed(4)+"%";
+  $("rStatus").textContent=ok?"CONNECTED ✓":"NO BALANCE";
+  $("rTok").textContent=ok?num(Math.round(daily/price))+" BNKRL":"—";
+  $("rD").textContent=ok?usd(daily):"—";
+  $("rW").textContent=ok?usd(daily*7):"—";
+  $("rM").textContent=ok?usd(daily*30):"—";
+  $("rY").textContent=ok?usd(daily*365):"—";
+  presets($("volPresets"),[100000,500000,1000000,5000000],()=>vol,v=>vol=v);
+  presets($("mcPresets"),[500000,2000000,10000000],()=>mc,v=>mc=v);
+}
+
+$("hold").oninput=e=>{hold=+e.target.value;render();};
+$("vol").oninput=e=>{vol=+e.target.value;render();};
+$("mc").oninput=e=>{mc=+e.target.value;render();};
+
+function tick(){
+  const ms=CYCLE*3600*1000, now=Date.now(), rem=ms-(now%ms);
+  const h=Math.floor(rem/3600000), m=Math.floor(rem%3600000/60000), s=Math.floor(rem%60000/1000);
+  const p=x=>String(x).padStart(2,"0");
+  $("count").textContent=p(h)+":"+p(m)+":"+p(s);
+  $("cbar").style.width=((1-rem/ms)*100)+"%";
+}
+setInterval(tick,1000); tick(); render();
+</script>
+</body>
+</html>
