@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { Menu, X } from 'lucide-react'
-import logo from '../assets/logo.png'
 import { scrollToHash } from '../lib/scrollToHash'
 
 const BUY_TO = { pathname: '/', hash: 'buy' }
@@ -10,10 +9,17 @@ const BUY_TO = { pathname: '/', hash: 'buy' }
 const navLinks = [
   { label: 'Home', to: '/', type: 'route' },
   { label: 'How to buy', to: { pathname: '/', hash: 'howtobuy' }, type: 'hash' },
-  { label: 'Gallery', to: { pathname: '/', hash: 'gallery' }, type: 'hash' },
   { label: 'PFP', to: '/pfp', type: 'route' },
   { label: 'Dashboard', to: '/dashboard', type: 'route' },
 ]
+
+function BrandMark() {
+  return (
+    <span className="font-display text-[1.05rem] font-bold tracking-tight text-white sm:text-[1.2rem]">
+      $BANKROLL
+    </span>
+  )
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -247,16 +253,11 @@ export default function Navbar() {
             <Link
               ref={brandRef}
               to="/"
-              className="relative z-[60] flex items-center gap-2"
+              className="relative z-[60] flex items-center"
               aria-label="1-800-BANKROLL home"
               onClick={closeMenu}
             >
-              <img
-                src={logo}
-                alt="1-800-BANKROLL"
-                className="h-10 w-auto object-contain sm:h-11 md:h-11"
-                decoding="async"
-              />
+              <BrandMark />
             </Link>
 
             <div ref={linksRef} className="hidden items-center gap-8 md:flex">

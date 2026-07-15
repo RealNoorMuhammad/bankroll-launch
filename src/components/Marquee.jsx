@@ -1,3 +1,5 @@
+import leaf from '../assets/leaf.png'
+
 const items = [
   { text: '1-800-BANKROLL', accent: true },
   { text: 'No help. Just profits.' },
@@ -8,12 +10,19 @@ const items = [
   { text: 'The line is open.', accent: true },
 ]
 
-function RubyDiamond() {
+function RobinhoodLeaf() {
   return (
-    <span aria-hidden className="relative inline-flex size-2.5 shrink-0 sm:size-3">
-      <span className="absolute inset-0 rotate-45 rounded-[1px] bg-[#ff2d4a] shadow-[0_0_10px_rgba(255,45,74,0.85),0_0_18px_rgba(176,16,48,0.55)]" />
-      <span className="absolute inset-[2px] rotate-45 rounded-[0.5px] bg-gradient-to-tr from-white/55 via-[#ff6b7f] to-[#9a0c24]" />
-    </span>
+    <img
+      src={leaf}
+      alt=""
+      aria-hidden
+      decoding="async"
+      className="h-3.5 w-auto shrink-0 object-contain sm:h-4 md:h-[1.15rem]"
+      style={{
+        filter:
+          'brightness(0) saturate(100%) invert(58%) sepia(96%) saturate(1800%) hue-rotate(73deg) brightness(1.05)',
+      }}
+    />
   )
 }
 
@@ -33,7 +42,7 @@ function Track() {
           >
             {item.text}
           </span>
-          <RubyDiamond />
+          <RobinhoodLeaf />
         </span>
       ))}
     </div>
