@@ -76,7 +76,7 @@ export default function Lore() {
           </p>
           <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
             A hotline built for{' '}
-            <span className="text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
+            <span className="text-bankroll-green">
               outlaws
             </span>
           </h2>

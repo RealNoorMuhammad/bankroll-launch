@@ -1,63 +1,89 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Sparkles } from 'lucide-react'
-import leaf from '../assets/leaf.png'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import meme1 from '../assets/memes/112 (1).png'
+import meme2 from '../assets/memes/112 (2).png'
+import meme3 from '../assets/memes/112 (3).png'
+import meme4 from '../assets/memes/112 (4).png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const frames = [
-  { label: 'Vault reel', span: 'md:col-span-2 md:row-span-2', tall: true },
-  { label: 'Desk cut', span: '' },
-  { label: 'Night dial', span: '' },
-  { label: 'Storm call', span: 'md:col-span-2' },
+const shots = [
+  {
+    id: '01',
+    src: meme3,
+    alt: 'Outlaw on the line during a storm call — 1-800 BANKROLL',
+  },
+  {
+    id: '02',
+    src: meme4,
+    alt: 'Vacant hotline desk in the Bankroll call floor',
+  },
+  {
+    id: '03',
+    src: meme2,
+    alt: 'Finger on the dial of the ruby 1-800 BANKROLL phone',
+  },
+  {
+    id: '04',
+    src: meme1,
+    alt: 'Four steps comic — ring, pick up, no help, chart goes green',
+  },
 ]
 
 export default function Gallery() {
   const sectionRef = useRef(null)
-  const titleRef = useRef(null)
-  const gridRef = useRef(null)
-  const badgeRef = useRef(null)
+  const headerRef = useRef(null)
+  const stageRef = useRef(null)
+  const stripRef = useRef(null)
+  const [active, setActive] = useState(0)
+  const [lightbox, setLightbox] = useState(false)
+  const shot = shots[active]
+
+  const go = useCallback((delta) => {
+    setActive((i) => (i + delta + shots.length) % shots.length)
+  }, [])
+
+  const prev = useCallback(() => go(-1), [go])
+  const next = useCallback(() => go(1), [go])
+
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightbox(false)
+      if (e.key === 'ArrowLeft') go(-1)
+      if (e.key === 'ArrowRight') go(1)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [lightbox, go])
 
   useLayoutEffect(() => {
     const section = sectionRef.current
     if (!section) return
 
     const ctx = gsap.context(() => {
-      const cards = gridRef.current?.children || []
-
-      gsap.set([badgeRef.current, titleRef.current], { y: 36, opacity: 0 })
-      gsap.set(cards, { y: 48, opacity: 0, scale: 0.94 })
+      gsap.set([headerRef.current, stageRef.current, stripRef.current], {
+        y: 40,
+        opacity: 0,
+      })
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top 75%',
+          start: 'top 72%',
           once: true,
         },
       })
 
-      tl.to(badgeRef.current, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' })
-        .to(titleRef.current, { y: 0, opacity: 1, duration: 0.85, ease: 'power3.out' }, '-=0.45')
-        .to(
-          cards,
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power3.out',
-          },
-          '-=0.4',
-        )
-
-      gsap.to('.gallery-shimmer', {
-        backgroundPosition: '200% center',
-        duration: 2.8,
-        repeat: -1,
-        ease: 'none',
-      })
+      tl.to(headerRef.current, { y: 0, opacity: 1, duration: 0.75, ease: 'power3.out' })
+        .to(stageRef.current, { y: 0, opacity: 1, duration: 0.85, ease: 'power3.out' }, '-=0.45')
+        .to(stripRef.current, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, '-=0.5')
     }, section)
 
     return () => ctx.revert()
@@ -71,146 +97,185 @@ export default function Gallery() {
       className="relative isolate overflow-hidden px-5 py-20 sm:px-8 sm:py-24 md:py-28"
       style={{
         background:
-          'linear-gradient(180deg, #050505 0%, #0c0407 40%, #050505 100%)',
+          'radial-gradient(ellipse 80% 55% at 50% 0%, rgba(176,16,48,0.22) 0%, transparent 55%), linear-gradient(180deg, #070504 0%, #0d0608 45%, #050303 100%)',
       }}
     >
-      {/* Dividers */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-[#e8c87f]/80 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-[#e8c87f]/75 to-transparent"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-[3px] bg-gradient-to-r from-transparent via-[#b01030]/70 to-transparent blur-[1px]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-[#e8c87f]/75 to-transparent"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-[#e8c87f]/80 to-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[3px] bg-gradient-to-r from-transparent via-[#b01030]/70 to-transparent blur-[1px]"
+        className="pointer-events-none absolute top-1/2 left-1/2 h-[70%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(35,87,1,0.08)_0%,transparent_70%)]"
       />
 
-      {/* Atmosphere */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(176,16,48,0.28)_0%,transparent_50%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(1,50,31,0.07)_0%,transparent_45%)]"
-      />
-      <div
-        aria-hidden
-        className="gallery-shimmer pointer-events-none absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            'linear-gradient(110deg, transparent 20%, rgba(232,200,127,0.08) 45%, transparent 70%)',
-          backgroundSize: '200% 100%',
-        }}
-      />
-
-      <div className="relative z-10 mx-auto w-full max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <div
-            ref={badgeRef}
-            className="inline-flex items-center gap-2 rounded-full border border-bankroll-gold/40 bg-black/50 px-3.5 py-1.5 backdrop-blur-md"
-          >
-            <Sparkles className="size-3.5 text-bankroll-green" strokeWidth={2} aria-hidden />
-            <span className="font-sans text-[0.65rem] font-semibold tracking-[0.22em] text-bankroll-gold uppercase sm:text-[0.7rem]">
-              Vault preview
-            </span>
-            <span className="relative flex size-2">
-              <span className="absolute inset-0 animate-ping rounded-full bg-bankroll-ruby opacity-70" />
-              <span className="relative size-2 rounded-full bg-[#ff4d67]" />
-            </span>
-          </div>
-
-          <div ref={titleRef}>
-            <h2 className="mt-5 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              Gallery{' '}
-              <span className="text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
-                under development
-              </span>
+      <div className="relative z-10 mx-auto w-full max-w-5xl">
+        <div
+          ref={headerRef}
+          className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <div>
+            <p className="font-sans text-[0.65rem] font-semibold tracking-[0.28em] text-bankroll-gold uppercase sm:text-xs">
+              Media vault
+            </p>
+            <h2 className="mt-2 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+              Hotline{' '}
+              <span className="text-bankroll-green">stills</span>
             </h2>
-            <p className="mt-4 font-display text-lg text-white/65 italic sm:text-xl md:text-2xl">
-              Frames are hanging. The outlaw shots drop soon.
+            <p className="mt-3 max-w-md font-display text-lg text-white/55 italic sm:text-xl">
+              Scenes from the line. Tap a frame to step through the vault.
             </p>
           </div>
+
+          <div className="flex items-center gap-3 self-start sm:self-auto">
+            <span className="font-mono text-sm tracking-widest text-bankroll-gold/80">
+              {shot.id}
+              <span className="text-white/30"> / {String(shots.length).padStart(2, '0')}</span>
+            </span>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Previous still"
+                className="flex size-10 items-center justify-center rounded-full border border-bankroll-gold/35 bg-black/40 text-bankroll-gold transition hover:border-bankroll-gold hover:bg-black/70"
+              >
+                <ChevronLeft className="size-5" strokeWidth={1.75} />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Next still"
+                className="flex size-10 items-center justify-center rounded-full border border-bankroll-gold/35 bg-black/40 text-bankroll-gold transition hover:border-bankroll-gold hover:bg-black/70"
+              >
+                <ChevronRight className="size-5" strokeWidth={1.75} />
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div
-          ref={gridRef}
-          className="mt-12 grid grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-5 md:grid-cols-4 md:grid-rows-2 md:gap-5"
-        >
-          {frames.map((frame, i) => (
-            <div
-              key={frame.label}
-              className={`group relative overflow-hidden rounded-2xl border border-bankroll-gold/30 bg-[#0a0608] ${frame.span} ${
-                frame.tall ? 'min-h-[280px] sm:min-h-[320px] md:min-h-0' : 'min-h-[180px] sm:min-h-[200px]'
-              }`}
-            >
-              {/* Ornate frame edge */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-[6px] rounded-xl border border-white/5"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(176,16,48,0.35)_0%,transparent_65%)] opacity-80 transition duration-500 group-hover:opacity-100"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-40"
-                style={{
-                  backgroundImage:
-                    'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 10px)',
-                }}
-              />
-
-              {/* Corner gems */}
-              {[
-                'top-3 left-3',
-                'top-3 right-3',
-                'bottom-3 left-3',
-                'bottom-3 right-3',
-              ].map((pos) => (
-                <span
-                  key={pos}
-                  aria-hidden
-                  className={`absolute ${pos} size-2 rotate-45 bg-[#ff2d4a] shadow-[0_0_10px_rgba(255,45,74,0.7)]`}
-                />
-              ))}
-
-              <div className="relative z-10 flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
-                <img
-                  src={leaf}
-                  alt=""
-                  className="size-8 object-contain opacity-70 brightness-0 invert sm:size-9"
-                  decoding="async"
-                />
-                <p className="font-sans text-[0.65rem] tracking-[0.22em] text-bankroll-gold/90 uppercase">
-                  {frame.label}
-                </p>
-                <p className="font-display text-lg text-white/50 italic sm:text-xl">
-                  Soon
-                </p>
-              </div>
-
-              {/* Hover light */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-white/10 to-transparent transition duration-700 group-hover:translate-x-[120%]"
+        {/* Stage */}
+        <div ref={stageRef} className="mt-10 sm:mt-12">
+          <button
+            type="button"
+            onClick={() => setLightbox(true)}
+            aria-label="Open still full screen"
+            className="group relative block w-full overflow-hidden rounded-sm border border-bankroll-gold/25 bg-black/60 text-left outline-none transition hover:border-bankroll-gold/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bankroll-gold"
+          >
+            <div className="flex max-h-[min(62vh,640px)] items-center justify-center px-3 py-4 sm:px-5 sm:py-5">
+              <img
+                key={shot.id}
+                src={shot.src}
+                alt={shot.alt}
+                className="max-h-[min(58vh,600px)] w-auto max-w-full object-contain transition duration-500 group-hover:scale-[1.015]"
+                loading="eager"
+                decoding="async"
               />
             </div>
-          ))}
+            <span className="pointer-events-none absolute right-3 bottom-3 font-sans text-[0.6rem] tracking-[0.2em] text-white/40 uppercase opacity-0 transition group-hover:opacity-100 sm:right-4 sm:bottom-4">
+              Expand
+            </span>
+          </button>
         </div>
 
-        <p className="mt-10 text-center font-sans text-xs tracking-[0.18em] text-white/40 uppercase sm:text-sm">
-          $BANKROLL · media vault locked
-        </p>
+        {/* Thumbnail strip */}
+        <div
+          ref={stripRef}
+          className="mt-5 flex gap-3 overflow-x-auto pb-1 sm:mt-6 sm:gap-4"
+          role="listbox"
+          aria-label="Vault stills"
+        >
+          {shots.map((item, i) => {
+            const selected = i === active
+            return (
+              <button
+                key={item.id}
+                type="button"
+                role="option"
+                aria-selected={selected}
+                onClick={() => setActive(i)}
+                className={`relative w-[28%] min-w-[7.5rem] shrink-0 overflow-hidden rounded-sm border bg-black/50 transition sm:w-[22%] sm:min-w-0 ${
+                  selected
+                    ? 'border-bankroll-green shadow-[0_0_24px_rgba(35,87,1,0.35)]'
+                    : 'border-white/10 hover:border-bankroll-gold/40'
+                }`}
+              >
+                <img
+                  src={item.src}
+                  alt=""
+                  className={`aspect-[4/3] h-auto w-full object-cover transition duration-500 ${
+                    selected ? 'opacity-100' : 'opacity-55 hover:opacity-85'
+                  }`}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span
+                  className={`absolute top-2 left-2 font-mono text-[0.6rem] tracking-widest ${
+                    selected ? 'text-bankroll-green' : 'text-white/50'
+                  }`}
+                >
+                  {item.id}
+                </span>
+              </button>
+            )
+          })}
+        </div>
       </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/92 p-4 backdrop-blur-md sm:p-8"
+          role="dialog"
+          aria-modal="true"
+          aria-label={shot.alt}
+          onClick={() => setLightbox(false)}
+        >
+          <button
+            type="button"
+            aria-label="Close"
+            className="absolute top-4 right-4 z-10 flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white transition hover:border-bankroll-gold hover:text-bankroll-gold sm:top-6 sm:right-6"
+            onClick={() => setLightbox(false)}
+          >
+            <X className="size-5" strokeWidth={1.75} />
+          </button>
+
+          <button
+            type="button"
+            aria-label="Previous still"
+            className="absolute top-1/2 left-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/50 text-bankroll-gold transition hover:border-bankroll-gold sm:left-6"
+            onClick={(e) => {
+              e.stopPropagation()
+              prev()
+            }}
+          >
+            <ChevronLeft className="size-6" strokeWidth={1.75} />
+          </button>
+
+          <button
+            type="button"
+            aria-label="Next still"
+            className="absolute top-1/2 right-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/50 text-bankroll-gold transition hover:border-bankroll-gold sm:right-6"
+            onClick={(e) => {
+              e.stopPropagation()
+              next()
+            }}
+          >
+            <ChevronRight className="size-6" strokeWidth={1.75} />
+          </button>
+
+          <img
+            src={shot.src}
+            alt={shot.alt}
+            className="max-h-[88vh] max-w-[min(96vw,1100px)] object-contain"
+            onClick={(e) => e.stopPropagation()}
+            decoding="async"
+          />
+        </div>
+      )}
     </section>
   )
 }

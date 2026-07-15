@@ -201,7 +201,7 @@ export default function Hero() {
               {...fadeUp(0.22)}
             >
               <span className="block text-white">1-800</span>
-              <span className="mt-1 block text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
+              <span className="mt-1 block text-bankroll-green">
                 $BANKROLL
               </span>
             </motion.h1>
@@ -266,7 +266,7 @@ export default function Hero() {
           aria-label={ringing ? 'Phone ringing — wait for this tap to finish' : 'Ring the 1-800-BANKROLL phone'}
           aria-busy={ringing}
           disabled={ringing}
-          className={`relative z-20 mt-[77px] w-[88%] max-w-[300px] self-center border-0 bg-transparent p-0 outline-none focus:outline-none focus-visible:outline-none min-[390px]:max-w-[340px] sm:mt-16 sm:w-[70%] sm:max-w-[400px] md:absolute md:right-[6%] md:bottom-[5%] md:mt-0 md:w-[54%] md:max-w-[820px] md:self-auto lg:right-[10%] lg:w-[50%] xl:right-[12%] xl:max-w-[920px] ${ringing ? 'cursor-wait' : 'cursor-pointer'}`}
+          className={`relative z-20 mt-1 w-[88%] max-w-[300px] -translate-x-[10%] self-center border-0 bg-transparent p-0 outline-none focus:outline-none focus-visible:outline-none min-[390px]:max-w-[340px] sm:mt-8 sm:w-[70%] sm:max-w-[400px] sm:translate-x-0 md:absolute md:right-[6%] md:bottom-[5%] md:mt-0 md:w-[54%] md:max-w-[820px] md:translate-x-0 md:self-auto lg:right-[10%] lg:w-[50%] xl:right-[12%] xl:max-w-[920px] ${ringing ? 'cursor-wait' : 'cursor-pointer'}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: easeOut, delay: 0.35 }}

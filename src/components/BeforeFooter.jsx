@@ -46,7 +46,7 @@ export default function BeforeFooter() {
 
             <h2 className="mt-3 font-display text-[2.15rem] leading-[1.05] font-bold tracking-tight text-white uppercase sm:mt-4 sm:text-5xl md:text-6xl md:[text-shadow:0_2px_4px_rgba(0,0,0,0.85),0_0_24px_rgba(0,0,0,0.55)] lg:text-7xl">
               But the{' '}
-              <span className="text-bankroll-green [-webkit-text-stroke:1.5px_#c7a45c] [paint-order:stroke_fill] sm:[-webkit-text-stroke:2px_#c7a45c]">
+              <span className="text-bankroll-green">
                 Chart
               </span>{' '}
               Can.
