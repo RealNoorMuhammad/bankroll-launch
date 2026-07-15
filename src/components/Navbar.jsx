@@ -149,7 +149,7 @@ export default function Navbar() {
           backgroundColor: 'rgba(0,0,0,0.9)',
           borderColor: 'rgba(199,164,92,0.4)',
           boxShadow:
-            '0 20px 55px rgba(0,0,0,0.6), 0 0 0 1px rgba(35,87,1,0.08), inset 0 1px 0 rgba(255,255,255,0.07)',
+            '0 20px 55px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,200,5,0.08), inset 0 1px 0 rgba(255,255,255,0.07)',
           backdropFilter: 'blur(20px)',
           duration: 0.7,
           ease: 'power3.out',

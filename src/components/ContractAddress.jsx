@@ -13,7 +13,7 @@ export default function ContractAddress() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(35,87,1,0.06)_0%,transparent_45%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,200,5,0.06)_0%,transparent_45%)]"
       />
 
       <motion.div

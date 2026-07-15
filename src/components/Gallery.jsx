@@ -110,7 +110,7 @@ export default function Gallery() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute top-1/2 left-1/2 h-[70%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(35,87,1,0.08)_0%,transparent_70%)]"
+        className="pointer-events-none absolute top-1/2 left-1/2 h-[70%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(0,200,5,0.08)_0%,transparent_70%)]"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl">
@@ -199,7 +199,7 @@ export default function Gallery() {
                 onClick={() => setActive(i)}
                 className={`relative w-[28%] min-w-[7.5rem] shrink-0 overflow-hidden rounded-sm border bg-black/50 transition sm:w-[22%] sm:min-w-0 ${
                   selected
-                    ? 'border-bankroll-green shadow-[0_0_24px_rgba(35,87,1,0.35)]'
+                    ? 'border-bankroll-green shadow-[0_0_24px_rgba(0,200,5,0.35)]'
                     : 'border-white/10 hover:border-bankroll-gold/40'
                 }`}
               >

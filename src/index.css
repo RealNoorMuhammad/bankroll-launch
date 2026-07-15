@@ -4,14 +4,14 @@
 @theme {
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Outfit', ui-sans-serif, sans-serif;
-  --color-bankroll-green: #235701;
+  --color-bankroll-green: #00C805;
   --color-bankroll-gold: #c7a45c;
   --color-bankroll-ruby: #b01030;
 }
 
-/* Lacquer #235701 — inset sheen only, never drop-shadow / glow */
+/* #00C805 — inset sheen only, never drop-shadow / glow */
 .bankroll-green-shine {
-  background-color: #235701;
+  background-color: #00C805;
   background-image: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.16) 0%,
@@ -24,12 +24,12 @@
 }
 
 .bankroll-green-shine:hover {
-  background-color: #2d6e02;
+  background-color: #0ad810;
   filter: none;
 }
 
 .text-bankroll-green {
-  color: #235701;
+  color: #00C805;
   text-shadow: none;
   filter: none;
 }
