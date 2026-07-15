@@ -17,16 +17,11 @@ function RubyDiamond() {
   )
 }
 
-function Track({ reverse = false }) {
+function Track() {
   const sequence = [...items, ...items]
 
   return (
-    <div
-      className={`marquee-track flex w-max items-center gap-6 sm:gap-8 md:gap-10 ${
-        reverse ? 'marquee-track--reverse' : ''
-      }`}
-      aria-hidden={reverse ? true : undefined}
-    >
+    <div className="marquee-track flex w-max items-center gap-6 sm:gap-8 md:gap-10">
       {sequence.map((item, i) => (
         <span key={`${item.text}-${i}`} className="flex items-center gap-6 sm:gap-8 md:gap-10">
           <span
@@ -60,13 +55,8 @@ export default function Marquee() {
         className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-black to-transparent sm:w-20"
       />
 
-      <div className="relative flex flex-col gap-2.5 py-3.5 sm:gap-3 sm:py-4 md:gap-3.5 md:py-5">
-        <div className="marquee-row">
-          <Track />
-        </div>
-        <div className="marquee-row">
-          <Track reverse />
-        </div>
+      <div className="marquee-row relative py-3.5 sm:py-4 md:py-5">
+        <Track />
       </div>
     </section>
   )
