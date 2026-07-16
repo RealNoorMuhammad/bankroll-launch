@@ -3,8 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { Menu, X } from 'lucide-react'
 import { scrollToHash } from '../lib/scrollToHash'
-
-const BUY_TO = { pathname: '/', hash: 'buy' }
+import { DEXSCREENER_URL } from '../lib/contract'
 
 const navLinks = [
   { label: 'Home', to: '/', type: 'route' },
@@ -265,16 +264,14 @@ export default function Navbar() {
             </div>
 
             <div ref={ctaRef} className="hidden items-center gap-3 md:flex">
-              <Link
-                to={BUY_TO}
-                onClick={(e) => {
-                  e.preventDefault()
-                  goHash('buy')
-                }}
+              <a
+                href={DEXSCREENER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bankroll-green-shine inline-flex items-center rounded-full px-4 py-2 font-sans text-xs font-bold tracking-wide uppercase transition"
               >
                 Buy $BANKROLL
-              </Link>
+              </a>
             </div>
 
             <button
@@ -313,19 +310,18 @@ export default function Navbar() {
             }),
           )}
 
-          <Link
-            to={BUY_TO}
+          <a
+            href={DEXSCREENER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             ref={(el) => {
               menuItemsRef.current[navLinks.length] = el
             }}
-            onClick={(e) => {
-              e.preventDefault()
-              goHash('buy')
-            }}
+            onClick={closeMenu}
             className="bankroll-green-shine mt-8 inline-flex items-center justify-center rounded-xl px-6 py-4 font-sans text-sm font-bold tracking-[0.16em] uppercase"
           >
             Buy $BANKROLL
-          </Link>
+          </a>
         </div>
 
         <p className="px-6 pb-8 text-center font-sans text-xs tracking-[0.2em] text-white/40 uppercase">

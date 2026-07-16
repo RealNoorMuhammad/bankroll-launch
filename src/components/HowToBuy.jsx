@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Wallet, Fuel, ArrowLeftRight, BadgeCheck } from 'lucide-react'
+import { CONTRACT_ADDRESS } from '../lib/contract'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -22,7 +23,7 @@ const steps = [
     num: '03',
     icon: ArrowLeftRight,
     title: 'Swap $ETH for $BANKROLL',
-    body: 'Head to your favourite DEX on the Robinhood Chain. When the CA drops, paste the $BANKROLL address into the swap menu and smash confirm.',
+    body: 'Head to your favourite DEX on the Robinhood Chain. Paste the official $BANKROLL CA into the swap menu and smash confirm.',
   },
   {
     num: '04',
@@ -245,8 +246,8 @@ export default function HowToBuy() {
           <p className="font-sans text-[0.65rem] tracking-[0.2em] text-white/45 uppercase">
             Contract address
           </p>
-          <p className="mt-2 font-display text-xl font-bold text-white sm:text-2xl">
-            Coming Soon
+          <p className="mt-2 break-all font-mono text-sm font-bold text-white sm:text-base md:text-lg">
+            {CONTRACT_ADDRESS}
           </p>
           <p className="mt-1 font-sans text-xs tracking-[0.2em] text-bankroll-ruby uppercase sm:text-sm">
             on Robinhood Chain

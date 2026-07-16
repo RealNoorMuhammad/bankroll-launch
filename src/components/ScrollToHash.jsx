@@ -10,6 +10,12 @@ export default function ScrollToHash() {
   const { pathname, hash, key } = useLocation()
 
   useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'
+    }
+  }, [])
+
+  useEffect(() => {
     if (hash) {
       void scrollToHashWhenReady(hash)
       return

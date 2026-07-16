@@ -214,13 +214,17 @@ export default function Gallery() {
     }
   }, [active])
 
-  // Keep active thumb in view
+  // Keep active thumb in view within the strip only (never scroll the page)
   useEffect(() => {
-    const el = stripRef.current?.querySelector(`[data-thumb="${active}"]`)
-    el?.scrollIntoView({
+    const strip = stripRef.current
+    const el = strip?.querySelector(`[data-thumb="${active}"]`)
+    if (!strip || !el) return
+
+    const target =
+      el.offsetLeft - (strip.clientWidth - el.offsetWidth) / 2
+    strip.scrollTo({
+      left: Math.max(0, target),
       behavior: reducedMotion ? 'auto' : 'smooth',
-      inline: 'nearest',
-      block: 'nearest',
     })
   }, [active, reducedMotion])
 

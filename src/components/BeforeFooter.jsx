@@ -1,10 +1,11 @@
 import { Phone } from 'lucide-react'
 import beforeFooterDesktop from '../assets/beforefooterdesktop.png'
 import beforeFooterMobile from '../assets/beforefootermobile.png'
-
-const CALL_HREF = 'tel:18002657655'
+import { usePhoneRing } from '../hooks/usePhoneRing'
 
 export default function BeforeFooter() {
+  const { ringing, ring } = usePhoneRing()
+
   return (
     <section
       className="relative w-full overflow-hidden"
@@ -52,9 +53,12 @@ export default function BeforeFooter() {
               Can.
             </h2>
 
-            <a
-              href={CALL_HREF}
-              className="btn-ruby-diamond mt-7 px-5 py-3 font-sans text-sm sm:mt-9 sm:gap-3 sm:px-7 sm:py-3.5 sm:text-base md:text-lg"
+            <button
+              type="button"
+              onClick={() => void ring()}
+              disabled={ringing}
+              aria-busy={ringing}
+              className="btn-ruby-diamond mt-7 px-5 py-3 font-sans text-sm sm:mt-9 sm:gap-3 sm:px-7 sm:py-3.5 sm:text-base md:text-lg disabled:cursor-wait"
             >
               <Phone
                 className="btn-ruby-icon size-4 shrink-0 sm:size-5"
@@ -62,7 +66,7 @@ export default function BeforeFooter() {
                 aria-hidden
               />
               CALL 1-800-BANKROLL
-            </a>
+            </button>
           </div>
         </div>
       </div>
