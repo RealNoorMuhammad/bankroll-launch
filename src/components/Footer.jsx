@@ -15,10 +15,13 @@ export default function Footer() {
 
         <p className="order-3 text-center font-sans text-[0.7rem] tracking-wide text-white/90 md:order-none md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:text-xs">
           © {new Date().getFullYear()} 1-800-BANKROLL. All rights reserved.
+          <span className="mt-1 block tracking-[0.18em] text-white/45 uppercase">
+            No help. Just profits.
+          </span>
         </p>
 
         <div className="flex items-center gap-2 font-sans text-sm text-white sm:text-base">
-          <span className="text-white/90">Built on</span>
+          <span className="text-white/90">No rescue.</span>
           <img
             src={leaf}
             alt=""
@@ -26,7 +29,7 @@ export default function Footer() {
             decoding="async"
             aria-hidden
           />
-          <span className="font-semibold tracking-wide">Robinhood</span>
+          <span className="font-semibold tracking-wide">Robinhood Chain</span>
         </div>
       </div>
     </footer>

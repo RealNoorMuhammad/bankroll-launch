@@ -154,7 +154,7 @@ export default function Hero() {
               className="font-sans text-[0.65rem] font-semibold tracking-[0.28em] text-bankroll-gold uppercase sm:text-xs md:text-sm"
               {...fadeUp(0.12)}
             >
-              Welcome to
+              The line is open
             </motion.p>
 
             <motion.h1
@@ -188,7 +188,7 @@ export default function Hero() {
                 className="btn-ruby-diamond px-5 py-3 font-sans text-sm sm:px-6 sm:py-3.5 sm:text-[0.95rem] disabled:cursor-wait"
               >
                 <Phone className="btn-ruby-icon size-4 shrink-0 sm:size-[1.1rem]" strokeWidth={2.25} aria-hidden />
-                Call 1-800-Bankroll
+                Call 1-800-BANKROLL
               </button>
 
               <a
@@ -197,7 +197,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-lg border border-bankroll-gold/90 bg-black/55 px-5 py-3 font-sans text-sm font-semibold tracking-wide text-white uppercase transition hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bankroll-gold sm:px-6 sm:py-3.5 sm:text-[0.95rem]"
               >
-                Buy $BANKROLL
+                Hit the chart
               </a>
             </motion.div>
 

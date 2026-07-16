@@ -1,21 +1,30 @@
 import { motion } from 'motion/react'
 import leaf from '../assets/leaf.png'
+import lore01 from '../assets/lore/lore-01-the-line.png'
+import lore02 from '../assets/lore/lore-02-above-the-storm.png'
+import lore03 from '../assets/lore/lore-03-the-rule.png'
 
 const chapters = [
   {
     num: '01',
     title: 'The Line',
     body: 'They said if you dialed 1-800-BANKROLL you would get advice. They lied. The operators never helped. They only ever asked one question: did you check the chart?',
+    image: lore01,
+    alt: 'Empty underground hotline corridor — rows of ruby rotary phones, one ringing with a gold halo',
   },
   {
     num: '02',
     title: 'The Outlaw',
     body: 'Somewhere above the storm, a green hood sits at a marble desk and answers anyway — ruby phone glowing, city lightning for wallpaper. No safety net. No therapy. Just the open line.',
+    image: lore02,
+    alt: 'Green-hooded outlaw at a marble penthouse desk above a thunderstorm, ruby phone glowing',
   },
   {
     num: '03',
     title: 'The Rule',
     body: 'On Robinhood Chain, $BANKROLL does not come to rescue you. It comes to remind you: no help, just profits. The only hotline that can\'t help you... but the chart can.',
+    image: lore03,
+    alt: 'Ruby diamond rotary phone on black marble with a glowing green candlestick chart behind it',
   },
 ]
 
@@ -95,7 +104,16 @@ export default function Lore() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
               className="relative border-t border-[#e8c87f]/35 pt-6"
             >
-              <p className="font-mono text-xs tracking-[0.2em] text-[#ff5a72] sm:text-sm">
+              <div className="overflow-hidden border border-[#e8c87f]/25 bg-black/40">
+                <img
+                  src={chapter.image}
+                  alt={chapter.alt}
+                  className="aspect-[16/10] w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p className="mt-5 font-mono text-xs tracking-[0.2em] text-[#ff5a72] sm:text-sm">
                 {chapter.num}
               </p>
               <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
